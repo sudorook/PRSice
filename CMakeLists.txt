@@ -21,15 +21,8 @@ if(march)
 endif()
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 
-find_path(EIGEN_INCLUDE_DIR
-    NAME EIGEN
-    PATHS ${CMAKE_CURRENT_SOURCE_DIR}/lib/eigen-git-mirror/)
-if((NOT ${EIGEN_INCLUDE_DIR}) OR (NOT EXISTS ${EIGEN_INCLUDE_DIR}))
-    execute_process(COMMAND git submodule update --init -- lib/eigen/
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-    set(EIGEN_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/eigen/)
-endif()
-include_directories(${EIGEN_INCLUDE_DIR})
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+include_directories(${EIGEN3_INCLUDE_DIR})
 ################################
 #           Add zlib
 ################################
