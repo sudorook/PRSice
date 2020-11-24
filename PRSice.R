@@ -679,6 +679,15 @@ if (provided("prsice", argv)) {
       !startsWith(argv$prsice, ".") && os != "windows") {
     argv$prsice = paste("./", argv$prsice, sep = "")
   }
+} else {
+  exelist <- c("PRSice", "PRSice.exe", "PRSice_mac", "PRSice_linux", "PRSice_win64.exe", "PRSice_win32.exe")
+  exepaths <- Sys.which(exelist)
+  for (path in exepaths) {
+    if (length(path) > 0) {
+      argv$prsice <- path
+      break
+    }
+  }
 }
 
 
